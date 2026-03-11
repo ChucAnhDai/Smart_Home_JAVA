@@ -1972,7 +1972,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script>
   // --- FETCH CONFIG ---
-  const BASE_URL = 'http://localhost:8081/api';
+  const BASE_URL = window.location.origin + '/api';
   const token = localStorage.getItem('nexus_token');
   let devicesCache = {}; // Global cache for ID -> Name lookup
 
