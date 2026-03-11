@@ -49,9 +49,7 @@ Yêu cầu:
 Sử dụng MySQL chạy bằng XAMPP.
 
 ---------------------------------------------------------------------------------------
-prompt 3
-
-Hãy thiết kế cấu trúc project Spring Boot cho hệ thống Smart Home.
+thiết kế cấu trúc project Spring Boot cho hệ thống Smart Home.
 
 Công nghệ:
 
