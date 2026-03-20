@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.sql.Timestamp;
 
 @Data
@@ -45,6 +46,12 @@ public class Device {
 
     @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;
+
+    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EnergyMonitoring> energyMonitorings;
+
+    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ActivityLog> activityLogs;
 
     @PrePersist
     protected void onCreate() {

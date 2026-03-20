@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @Builder
@@ -28,6 +29,9 @@ public class Room {
 
     @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;
+
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Device> devices;
 
     @PrePersist
     protected void onCreate() {

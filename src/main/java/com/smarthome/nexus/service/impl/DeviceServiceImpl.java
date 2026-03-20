@@ -27,7 +27,10 @@ import com.smarthome.nexus.service.NotificationService;
 import com.smarthome.nexus.entity.NotificationType;
 import com.smarthome.nexus.service.RealtimeService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class DeviceServiceImpl implements DeviceService {
 
     private final DeviceRepository deviceRepository;
@@ -204,10 +207,16 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
+    @Transactional
     public void deleteDevice(Long id) {
+        log.warn("Deleting device with id: {}", id);
         Device device = deviceRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Device not found"));
+                .orElseThrow(() -> {
+                    log.error("Device not found with id: {}", id);
+                    return new ResourceNotFoundException("Device not found");
+                });
         deviceRepository.delete(device);
+        log.info("Successfully deleted device with id: {}", id);
     }
 
     private Pageable createPageable(int page, int size, String sortBy, String sortDir) {

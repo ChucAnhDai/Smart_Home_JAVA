@@ -110,11 +110,12 @@ public class RoomServiceImpl implements RoomService {
     public void deleteRoom(Long id) {
         log.warn("Deleting room with id: {}", id);
         Room room = roomRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Room not found with id: " + id));
-
-        // Unassign all devices from this room before deleting
-        deviceRepository.unassignDevicesFromRoom(id);
+                .orElseThrow(() -> {
+                    log.error("Room not found with id: {}", id);
+                    return new ResourceNotFoundException("Room not found with id: " + id);
+                });
 
         roomRepository.delete(room);
+        log.info("Successfully deleted room with id: {}", id);
     }
 }
