@@ -171,10 +171,10 @@
 
             if (response.ok) {
                 const data = await response.json();
-                localStorage.setItem('nexus_token', data.token);
+                localStorage.setItem('iot_token', data.token);
                 
                 // Save correct user info from Backend
-                localStorage.setItem('nexus_user', JSON.stringify({
+                localStorage.setItem('iot_user', JSON.stringify({
                     fullName: data.fullName,
                     email: data.email,
                     role: data.role

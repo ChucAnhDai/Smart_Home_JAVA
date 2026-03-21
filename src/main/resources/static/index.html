@@ -1099,7 +1099,7 @@
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-logo">
     <div class="logo-icon">
-      <img src="/icon.png" alt="Nexus Logo">
+      <img src="/icon.png" alt="IoT Logo">
     </div>
     <div>
       <div class="logo-text">UTE</div>
@@ -1974,7 +1974,7 @@
 <script>
   // --- FETCH CONFIG ---
   const BASE_URL = window.location.origin + '/api';
-  const token = localStorage.getItem('nexus_token');
+  const token = localStorage.getItem('iot_token');
   let devicesCache = {}; // Global cache for ID -> Name lookup
 
 
@@ -1989,7 +1989,7 @@
   }
 
   // Load User data
-  const userData = JSON.parse(localStorage.getItem('nexus_user') || '{}');
+  const userData = JSON.parse(localStorage.getItem('iot_user') || '{}');
   if (userData.fullName) {
     document.getElementById('sidebarUserName').textContent = userData.fullName;
     document.getElementById('sidebarUserRole').textContent = userData.role || 'User';
@@ -2014,8 +2014,8 @@
 
   // Logout
   document.querySelector('.sidebar-bottom .nav-item[style*="color:var(--red)"]').onclick = () => {
-    localStorage.removeItem('nexus_token');
-    localStorage.removeItem('nexus_user');
+    localStorage.removeItem('iot_token');
+    localStorage.removeItem('iot_user');
     window.location.href = 'login.html';
   };
 
@@ -2029,7 +2029,7 @@
     const response = await fetch(`${BASE_URL}${endpoint}`, { ...options, headers });
     if (!response.ok) {
         if (response.status === 401) {
-            localStorage.removeItem('nexus_token');
+            localStorage.removeItem('iot_token');
             window.location.href = 'login.html';
         }
         const errData = await response.json().catch(() => ({ message: response.statusText }));
@@ -2567,7 +2567,7 @@
     }
 
     document.getElementById('pageTitle').textContent = pageTitles[page] || page;
-    document.getElementById('pageBreadcrumb').innerHTML = `<span>Nexus</span><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span>${pageTitles[page]}</span>`;
+    document.getElementById('pageBreadcrumb').innerHTML = `<span>IoT</span><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span>${pageTitles[page]}</span>`;
 
     closeSidebar();
     closeNotif();
